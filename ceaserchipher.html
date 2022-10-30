@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 style="text-align: center;">Caesar Cipher Converter</h1>
+<div class="container" >
+    <input type="text" id="query" style="display: block; width: 100%; height: 10%; position: absolute;
+    left: 50%;
+      top: 30%;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      width: 60%;
+      font-size: large;
+      margin: auto;">
+    <button type="submit" onclick="encrypted()" style="width: 5%; height: 5%; display: block; position: absolute;
+left: 50%;
+top: 50%;
+">Convert</button>
+<p id="result" style= "font-size: 20px; position: absolute;
+left: 50%;
+top: 60%;
+background-color: yellow;"></p>
+</div>
+      
+      <script>
+          
+          function encrypted(){
+
+              var msg= document.getElementById("query").value;
+              var val= 50;
+            //   console.log(val);
+              var res= encrypt(msg, val);
+                document.getElementById("result").innerHTML= res;
+              console.log(res);
+          }
+        function encrypt(msg, key)
+    {
+        // console.log(msg+key);
+        var encMsg = "";
+
+        for(var i = 0; i < msg.length; i++)
+        {
+            var code = msg.charCodeAt(i);
+
+            // Encrypt only letters in 'A' ... 'Z' interval
+            if (code >= 65 && code <= 65 + 26 - 1)
+            {
+                code -= 65;
+                code = mod(code + key, 26);
+                code += 65;
+            }
+
+            encMsg += String.fromCharCode(code);
+        }
+        // console.log(encMsg);
+        return encMsg;
+    }
+
+-
+    // Modulo function: n mod p
+    function mod(n, p)
+    {
+        if ( n < 0 )
+            n = p - Math.abs(n) % p;
+        return n % p;
+    }
+    </script>
+</body>
+</html>
